@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% import 'head.html' as hdr %}
+	{{ hdr }}
+</head>
+
+<body>
+<div class="body">
+	<fieldset>
+		{% import 'header.html' as hd%}
+		{{ hd }}
+		
+		<section>
+			{% import 'nav.html' as nv %} 
+			{{ nv }}
+			
+			<article>
+				<h3>Upload document for training</h3>
+				
+				<form id='form1' action="http://localhost:5000/uploader" method="POST" enctype="multipart/form-data">
+					<input type="file" name="file" required/> 
+					<br>
+					<br>
+					<input type="submit" value="Upload"/>
+				</form>
+				<div>
+					{% if msg %}
+						<h3>{{ msg }}</h3>
+					{% endif %}
+				</div>
+			</article>
+		</section>
+
+		{% import 'footer.html' as ft %}
+		{{ ft }}
+		
+</fieldset>
+
+</body>
+</html>

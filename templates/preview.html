@@ -1,0 +1,73 @@
+
+<html lang="en">
+<head>
+	{% import 'head.html' as hdr %}
+	{{ hdr }}
+</head>
+<body>
+<div class="body">
+	<fieldset>
+		{% import 'header.html' as hd%}
+		{{ hd }}
+		
+		<section>
+			{% import 'nav.html' as nv %} 
+			{{ nv }}
+			<article>
+				<h3>Select a File for training.</h3>
+			
+				<form id="form1" action="http://localhost:5000/display" method="POST" enctype="multipart/form-data">
+					<select id="mySelect" name="fileselect">
+					
+						<option selected value="----">------</option>
+						<option value="file1">File 1</option>
+						<option value="file2">File 2</option> 
+					</select> 
+					<br>
+					<br>
+					<input type="submit" value="Display"/>
+				</form>
+				<br>
+				
+				<div>
+					{% if msg %}
+						<h3>{{ msg }}</h3>
+					{% endif %}
+					{% if data %}
+						<h3>Output Table</h3>
+						{% for i in data %}
+							<h4 style="padding:5px; margin:5px; border:1px solid grey; color:black;">{{ i }}</h4>
+						{% endfor %}
+					{% endif %}
+
+				</div>
+				<div id="output">
+				<!--table style="border:1px solid black;">
+					<thead>
+						<tr>
+							<th>Book ID</th><th>Book Name</th><th>Category</th><th>Price</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td><td>Computer Architecture</td><td>Computers</td><td>125.60</td>
+						</tr>
+						<tr>
+							<td>2</td><td>Asp.Net 4 Blue Book</td><td>Programming</td><td>56.00</td>
+						</tr>
+						<tr>
+							<td>3</td><td>Popular Science</td><td>Science</td><td>210.40</td>
+						</tr>
+					</tbody>
+				</table-->
+				</div>
+			</article>
+		</section>
+
+		{% import 'footer.html' as ft %}
+		{{ ft }}
+		
+</fieldset>
+</div>
+</body>
+</html>
