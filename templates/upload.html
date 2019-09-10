@@ -19,12 +19,12 @@
 				<h3>Upload document for training</h3>
 				
 				<form id='form1' action="http://localhost:5000/uploader" method="POST" enctype="multipart/form-data">
-					<input type="file" name="file" required/> 
+					<input type="file" name="file" required/>
 					<br>
 					<br>
 					<input type="submit" value="Upload"/>
 				</form>
-				<div>
+				<div style="color:red;">
 					{% if msg %}
 						<h3>{{ msg }}</h3>
 					{% endif %}
@@ -36,6 +36,6 @@
 		{{ ft }}
 		
 </fieldset>
-
+</div>
 </body>
 </html>

@@ -25,17 +25,17 @@ header {
 }
 
 .logo{
-  border-radius:12px;
-  padding: 3px;
+  padding: 5px;
   margin: 5px;
   text-align:center;
 }
 
 .logo_img{
-	width:150px; 
-	height:150px; 
-	border:1px solid; 
-	border-radius:30px; 
+	width:150px;
+	height:150px;
+	padding:5px;
+    border:1px solid;
+    border-radius:40px;
 	color:black;
 	background-color:white;
 }
@@ -150,3 +150,7 @@ table{
     border:1px solid grey;
     color:black;
 }
+
+
+
+

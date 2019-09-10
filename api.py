@@ -10,13 +10,13 @@ from flask import Flask, render_template, redirect, url_for, request, jsonify, m
 from werkzeug import secure_filename
 import json
 from json2html import *  # please pip install it
+import os
 
 #from Load import App
 #app1 = App()
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-
 
 @app.route('/')
 @app.route('/index')
@@ -36,7 +36,7 @@ def upload_file():
     msg=''
     if request.method == 'POST':
         f = request.files['file']
-        f.save(secure_filename(f.filename))
+        f.save("static/data/"+secure_filename(f.filename))
         #cdqa, qag = app1.training()  ### Which will generate final json which contain Q and A it will take at least 20-25 min to generate all question and answers ans saved as Rasa.json
         msg = 'File '+str(f.filename)+' Uploaded Successfully !'
     else:
@@ -80,23 +80,34 @@ def display():
         #return json_data
 
 
-# below api is not used for any request created for test
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == "POST":
-        fileselect = request.form.get("fileselect", None)
 
-        if fileselect == "file1":
-            data = json.load(open("static/data/Rasa_ppt.json"))
-            msg = 'file Rasa_ppt.json loaded !'
-        elif fileselect == "file2":
-            data = json.load(open("static/data/Rasa_Word.json"))
-            msg = 'file Rasa_Word.json loaded !'
-        else:
-            data={}
-            msg = 'No file selected !'
 
-        return render_template('preview.html', msg=msg, data=data)
 
+# to render upload UI
+@app.route('/img')
+def img():
+    return render_template('img.html')
+
+# to render uploaded img file
+@app.route('/imgview', methods=['POST'])
+def imgview():
+    msg = ''
+    f = None
+    if request.method == 'POST':
+        f = request.files['imgfileupload']
+        f.save("static/data/"+secure_filename(f.filename))
+        # cdqa, qag = app1.training()  ### Which will generate final json which contain Q and A it will take at least 20-25 min to generate all question and answers ans saved as Rasa.json
+        msg = 'File ' + str(f.filename) + ' Uploaded Successfully !'
+    else:
+        msg = 'Upload Failed or Request Failed !'
+    return render_template('img.html',
+                           msg=msg,
+                           ifile=os.path.join("static/data/",f.filename),
+                           ofile=os.path.join("static/data/",'0_mask.png'))
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+	
 if __name__ == '__main__':
-    app.run(debug=True,use_reloader=True)
+    app.run(debug=True)
