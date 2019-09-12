@@ -12,9 +12,6 @@ import json
 from json2html import *  # please pip install it
 import os
 
-#from Load import App
-#app1 = App()
-
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
@@ -79,31 +76,6 @@ def display():
         return render_template('preview.html', msg=msg, data=data)
         #return json_data
 
-
-
-
-
-# to render upload UI
-@app.route('/img')
-def img():
-    return render_template('img.html')
-
-# to render uploaded img file
-@app.route('/imgview', methods=['POST'])
-def imgview():
-    msg = ''
-    f = None
-    if request.method == 'POST':
-        f = request.files['imgfileupload']
-        f.save("static/data/"+secure_filename(f.filename))
-        # cdqa, qag = app1.training()  ### Which will generate final json which contain Q and A it will take at least 20-25 min to generate all question and answers ans saved as Rasa.json
-        msg = 'File ' + str(f.filename) + ' Uploaded Successfully !'
-    else:
-        msg = 'Upload Failed or Request Failed !'
-    return render_template('img.html',
-                           msg=msg,
-                           ifile=os.path.join("static/data/",f.filename),
-                           ofile=os.path.join("static/data/",'0_mask.png'))
 
 @app.route('/about')
 def about():
